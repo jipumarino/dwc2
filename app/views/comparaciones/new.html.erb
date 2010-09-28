@@ -1,0 +1,11 @@
+<%= form_for @comparacion, :method => :post do |f| %>
+  <div id="datos1">
+    <%= f.text_field :url1 %>
+    <%= f.file_field :file1 %>
+  </div>
+  <div id="datos2">
+    <%= f.text_field :url2 %>
+    <%= f.file_field :file2 %>
+  </div>
+<% end %>
+
