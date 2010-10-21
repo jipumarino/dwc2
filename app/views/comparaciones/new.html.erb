@@ -1,11 +1,14 @@
-<%= form_for @comparacion, :method => :post do |f| %>
+<%= flash[:error] %>
+<%= form_for @comparacion, :method => :post, :html => {:multipart => true} do |f| %>
   <div id="datos1">
     <%= f.text_field :url1 %>
-    <%= f.file_field :file1 %>
+    <%= f.file_field :archivo1 %>
   </div>
   <div id="datos2">
     <%= f.text_field :url2 %>
-    <%= f.file_field :file2 %>
+    <%= f.file_field :archivo2 %>
   </div>
+  <%= f.select :idioma, @idiomas, :selected => :spa %>
+  <%= f.submit %>
 <% end %>
 

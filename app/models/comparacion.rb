@@ -1,9 +1,28 @@
 class Comparacion < ActiveRecord::Base
 
+  Idiomas = {'eng' => 'Inglés', 'spa' => 'Español'}
+
   ALLOWED_WORDS = %w(ADJ ADV NC NMEA NMON NP ORD PE PNC UMMX VCLIfin VCLIger VCLIinf VEadj VEfin VEger VEinf VHadj VHfin VHger VHinf VLadj VLfin VLger VLinf VMadj VMfin VMger VMinf VSadj VSfin VSger VSinf)
 
-  def get_tagged file_path
-    tagged = `sh /opt/tree-tagger/cmd/tree-tagger-spanish #{file_path}`.split("\n").map do |x|
+  validates_inclusion_of :idioma, :in => Idiomas 
+  
+  def archivo1= archivo
+    self[:data1] = archivo.read
+    self[:archivo1] = archivo.original_filename
+  end
+
+  def archivo2= archivo
+    self[:data2] = archivo.read
+    self[:archivo2] = archivo.original_filename
+  end
+
+  def get_tagged data
+    process = IO.popen('sh /Users/juan/bin/tree-tagger-spanish', 'w+')
+    process.puts data
+    process.close_write
+    out = process.read
+    process.close
+    tagged = out.split("\n").map do |x|
       cols = x.split("\t")
 
       if ALLOWED_WORDS.index(cols[1])
@@ -36,4 +55,10 @@ class Comparacion < ActiveRecord::Base
     end
   end
 
+  def freqs_diff
+    get_freqs_diff(
+      get_freqs(get_tagged(self[:data1])),
+      get_freqs(get_tagged(self[:data2]))
+    )
+  end
 end

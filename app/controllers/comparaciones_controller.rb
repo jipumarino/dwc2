@@ -2,12 +2,21 @@ class ComparacionesController < ApplicationController
 
   def new
     @comparacion = Comparacion.new  
+    @idiomas = Comparacion::Idiomas.map{|k,v| [v,k]}
+  end
+
+  def show
+    @comparacion = Comparacion.find(params['id'])
+    @freqs_diff = @comparacion.freqs_diff
   end
 
   def create
-   @freqs1 = get_freqs get_tagged params[:file1][:tempfile].path
-   @freqs2 = get_freqs get_tagged params[:file2][:tempfile].path
-   @df1a2 = get_freqs_diff @freqs1, @freqs2
-   @df2a1 = get_freqs_diff @freqs2, @freqs1
+    @comparacion = Comparacion.new(params[:comparacion])
+    if @comparacion.save
+      redirect_to @comparacion
+    else
+      flash[:error] = 'Hubo un problema guardando la comparación'
+      render :new
+    end
   end
 end

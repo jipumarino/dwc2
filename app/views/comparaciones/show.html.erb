@@ -1,0 +1,12 @@
+<html>
+  <head>
+    <title>Resultados</title>
+  </head>
+  <body>
+
+    <% @freqs_diff.sort_by{|f| -f[1][:freq_diff]}[0..150].sort_by{rand}.each do |row| %>
+      <span style="font-size:<%= row[1][:freq_diff]*8 %>px"><%= row[0] %></span>
+    <% end %>
+
+  </body>
+</html>

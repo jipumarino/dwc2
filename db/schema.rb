@@ -10,19 +10,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100928030353) do
+ActiveRecord::Schema.define(:version => 20100928132743) do
 
   create_table "comparaciones", :force => true do |t|
-    t.string   "filename1"
-    t.string   "filename2"
+    t.string   "archivo1"
+    t.string   "archivo2"
     t.string   "url1"
     t.string   "url2"
     t.text     "data1"
     t.text     "data2"
-    t.string   "code"
+    t.string   "codigo"
     t.string   "email"
+    t.integer  "idioma_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  add_index "comparaciones", ["idioma_id"], :name => "index_comparaciones_on_idioma_id"
+
+  create_table "idiomas", :force => true do |t|
+    t.string "nombre"
   end
 
 end
