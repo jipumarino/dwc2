@@ -3,7 +3,10 @@ class Comparacion < ActiveRecord::Base
 
   Idiomas = {'eng' => 'Inglés', 'spa' => 'Español'}
 
-  ALLOWED_WORDS = %w(ADJ ADV NC NMEA NMON NP ORD PE PNC UMMX VCLIfin VCLIger VCLIinf VEadj VEfin VEger VEinf VHadj VHfin VHger VHinf VLadj VLfin VLger VLinf VMadj VMfin VMger VMinf VSadj VSfin VSger VSinf)
+  AllowedWords = {
+    'eng' => %w(FW JJ NN NNS NP NPS VB VBD VBG VBN VBP VBZ),
+    'esp' => %w(ADJ ADV NC NMEA NMON NP ORD PE PNC UMMX VCLIfin VCLIger VCLIinf VEadj VEfin VEger VEinf VHadj VHfin VHger VHinf VLadj VLfin VLger VLinf VMadj VMfin VMger VMinf VSadj VSfin VSger VSinf)
+  }
 
   validates_inclusion_of :idioma, :in => Idiomas 
   
@@ -27,7 +30,7 @@ class Comparacion < ActiveRecord::Base
     tagged = out.split("\n").map do |x|
       cols = x.split("\t")
 
-      if ALLOWED_WORDS.index(cols[1])
+      if AllowedWords[idioma].index(cols[1])
         cols[2] == "<unknown>" ? cols[0] : cols[2]
       else
         "--NOVAL--"
