@@ -19,7 +19,7 @@ class Comparacion < ActiveRecord::Base
 
   def get_tagged data
     lang = idioma == 'eng' ? 'english' : 'spanish'
-    process = IO.popen("sh #{`which tree-tagger-#{lang}`}", 'w+')
+    process = IO.popen("sh #{`which tree-tagger-#{lang}`}", 'w+', :encoding => 'iso-8859-1')
     process.puts data
     process.close_write
     out = process.read
