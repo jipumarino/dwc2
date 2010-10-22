@@ -12,7 +12,6 @@ class CreateComparaciones < ActiveRecord::Migration
       t.string :idioma
       t.timestamps
     end
-    add_index :comparaciones, :idioma_id
   end
 
   def self.down

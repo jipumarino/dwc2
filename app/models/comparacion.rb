@@ -1,3 +1,4 @@
+# coding: utf-8
 class Comparacion < ActiveRecord::Base
 
   Idiomas = {'eng' => 'Inglés', 'spa' => 'Español'}

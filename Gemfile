@@ -8,7 +8,7 @@ gem 'rails', '3.0.0'
 gem 'mysql2'
 #gem 'irbtools'
 #gem 'irb_rocket'
-gem 'ruby-debug'
+#gem 'ruby-debug'
 
 # Use unicorn as the web server
 #gem 'unicorn'

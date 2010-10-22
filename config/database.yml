@@ -32,8 +32,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: dwc2_production
+  database: dwc2
   pool: 5
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  username: dwc2
+  password: dwc2
