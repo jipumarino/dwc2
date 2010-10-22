@@ -5,7 +5,7 @@ class Comparacion < ActiveRecord::Base
 
   AllowedWords = {
     'eng' => %w(FW JJ NN NNS NP NPS VB VBD VBG VBN VBP VBZ),
-    'esp' => %w(ADJ ADV NC NMEA NMON NP ORD PE PNC UMMX VCLIfin VCLIger VCLIinf VEadj VEfin VEger VEinf VHadj VHfin VHger VHinf VLadj VLfin VLger VLinf VMadj VMfin VMger VMinf VSadj VSfin VSger VSinf)
+    'spa' => %w(ADJ ADV NC NMEA NMON NP ORD PE PNC UMMX VCLIfin VCLIger VCLIinf VEadj VEfin VEger VEinf VHadj VHfin VHger VHinf VLadj VLfin VLger VLinf VMadj VMfin VMger VMinf VSadj VSfin VSger VSinf)
   }
 
   validates_inclusion_of :idioma, :in => Idiomas 
